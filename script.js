@@ -59,35 +59,28 @@ var questions = [
 
   function checkAnswer() {
     var currentQuestion = questions[currentQuestionIndex];
-    var selectedAnswer = null;
-    var answerInputs = document.getElementsByName("answer");
-    for (var i = 0; i < answerInputs.length; i++) {
-        if (answerInputs[i].checked) {
-            selectedAnswer = answerInputs[i];
-            break;
-        }
-    }
+    var selectedAnswer = document.querySelector('input[name="answer"]:checked');
     var resultEl = document.getElementById("result");
     if (!selectedAnswer) {
-        resultEl.textContent = "Please select an answer";
-        return;
+      resultEl.textContent = "Please select an answer";
+      return;
     }
     if (selectedAnswer.value === currentQuestion.answer) {
-        resultEl.textContent = "Correct!";
-        currentQuestionIndex++;
-        if (currentQuestionIndex === questions.length) {
-            endGame();
-        } else {
-            displayQuestion();
-        }
+      resultEl.textContent = "Correct!";
+      currentQuestionIndex++;
+      if (currentQuestionIndex === questions.length) {
+        endGame();
+      } else {
+        displayQuestion();
+      }
     } else {
-        resultEl.textContent = "Incorrect!";
-        timeLeft -= 10;
-        if (timeLeft < 0) {
-            timeLeft = 0;
-        }
+      resultEl.textContent = "Incorrect!";
+      timeLeft -= 10;
+      if (timeLeft < 0) {
+        timeLeft = 0;
+      }
     }
-}
+  }
 
 function endGame() {
     clearInterval(timerInterval);
@@ -95,8 +88,8 @@ function endGame() {
     answerEl.style.display = "none";
     submitBtn.style.display = "none";
     resultEl.innerHTML = `Game over! Your score is ${timeLeft}.<br>Enter your initials: <input type="text" id="initials"> <button id="submit-score">Submit</button>`;
-    const initialsInput = document.getElementById("initials");
-    const submitBtn = document.getElementById("submit-score");
+    var initialsInput = document.getElementById("initials");
+    var submitBtn = document.getElementById("submit-score");
     submitBtn.addEventListener("click", () => {
       saveScore(initialsInput.value, timeLeft);
       window.location.href = "highscores.html";
