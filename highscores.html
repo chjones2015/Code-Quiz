@@ -11,7 +11,9 @@
     <script>
         var scoresListEl = document.getElementById("scores-list");
         var scores = JSON.parse(localStorage.getItem("scores")) || [];
+        // Sort the scores in descending order
         scores.sort((a, b) => b.score - a.score);
+        // Loop through the scores and create a list item for each one
         scores.forEach((score) => {
           const liEl = document.createElement("li");
           liEl.textContent = `${score.initials}: ${score.score}`;
