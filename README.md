@@ -1,8 +1,8 @@
-# Module1 Webpage
+# Code Quiz
 
 ## Description
 
-My motivation was to learn how to code with HTML, CSS, JavaScript, and Git. I built this as the first homework assignment. This solves the problem of not having a fully working webpage. I learned some basics of how to code in the required languages.
+The Code Quiz is a web application built with HTML, CSS, and JavaScript that allows users to test their coding knowledge with a timed quiz. The user is presented with a series of multiple-choice questions and must select the correct answer before the time runs out. If the user selects the wrong answer, time is deducted from the clock. At the end of the quiz, the user can save their score with their initials and view a high scores page.
 
 ## Installation
 
@@ -10,7 +10,7 @@ N/A
 
 ## Usage
 
-This can be used as a guiding tool in regards to SEO, ORM, and SMM. The webpage now has fully functioning links to each part of the webpage. The semantics are now also updated to function correctly when needed. Image descriptions are also added for visibilty. Footer date is updated.
+Once the quiz has started, you will be presented with a series of multiple-choice questions. The quiz is timed, so you must answer all the questions before the time runs out. The remaining time is displayed at the top of the page. At the end of the quiz, you will be asked to enter your initials to save your score. Your score will be added to the high scores list, which you can view by clicking the "View High Scores" button.
 
 Link to webpage is below.
 
