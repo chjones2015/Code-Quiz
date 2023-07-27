@@ -40,3 +40,19 @@ var questions = [
     }
   }
 
+  function displayQuestion() {
+    var currentQuestion = questions[currentQuestionIndex];
+    questionEl.textContent = currentQuestion.question;
+    answerEl.value = "";
+    for (let i = 0; i < currentQuestion.choices.length; i++) {
+      const choice = currentQuestion.choices[i];
+      const radioEl = document.createElement("input");
+      radioEl.type = "radio";
+      radioEl.name = "answer";
+      radioEl.value = choice;
+      questionEl.appendChild(radioEl);
+      const labelEl = document.createElement("label");
+      labelEl.textContent = choice;
+      questionEl.appendChild(labelEl);
+    }
+  }
