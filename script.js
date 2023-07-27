@@ -95,3 +95,13 @@ function endGame() {
       window.location.href = "highscores.html";
     });
   }
+
+  
+  function saveScore(initials, score) {
+    var scores = JSON.parse(localStorage.getItem("scores")) || [];
+    scores.push({ initials, score });
+    localStorage.setItem("scores", JSON.stringify(scores));
+  }
+  
+  startBtn.addEventListener("click", startGame);
+  submitBtn.addEventListener("click", checkAnswer);
