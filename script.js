@@ -16,3 +16,26 @@ var questions = [
     },
   ];
   
+  var startBtn = document.getElementById("start-btn");
+  var timer = document.getElementById("timer");
+  var questionEl = document.getElementById("question");
+  var answerEl = document.getElementById("answer");
+  var submitBtn = document.getElementById("submit-btn");
+  var resultEl = document.getElementById("result");
+  
+  var currentQuestionIndex = 0;
+  var timeLeft = 60;
+  
+  function startGame() {
+    startBtn.disabled = true;
+    setInterval(updateTimer, 1000);
+    displayQuestion();
+  }
+  
+  function updateTimer() {
+    timeLeft--;
+    timer.textContent = "Time: " + timeLeft;
+    if (timeLeft === 0) {
+      endGame();
+    }
+  }
