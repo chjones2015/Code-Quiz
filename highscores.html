@@ -8,5 +8,15 @@
   <body>
     <h1>High Scores</h1>
     <ul id="scores-list"></ul>
+    <script>
+        var scoresListEl = document.getElementById("scores-list");
+        var scores = JSON.parse(localStorage.getItem("scores")) || [];
+        scores.sort((a, b) => b.score - a.score);
+        scores.forEach((score) => {
+          const liEl = document.createElement("li");
+          liEl.textContent = `${score.initials}: ${score.score}`;
+          scoresListEl.appendChild(liEl);
+        });
+      </script>
   </body>
 </html>

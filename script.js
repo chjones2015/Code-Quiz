@@ -41,26 +41,27 @@ var questions = [
   }
 
   function displayQuestion() {
-    var currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = questions[currentQuestionIndex];
     questionEl.textContent = currentQuestion.question;
     answerEl.value = "";
     for (let i = 0; i < currentQuestion.choices.length; i++) {
-      var choice = currentQuestion.choices[i];
-      var radioEl = document.createElement("input");
+      const choice = currentQuestion.choices[i];
+      const radioEl = document.createElement("input");
       radioEl.type = "radio";
       radioEl.name = "answer";
       radioEl.value = choice;
       questionEl.appendChild(radioEl);
-      var labelEl = document.createElement("label");
+      const labelEl = document.createElement("label");
       labelEl.textContent = choice;
       questionEl.appendChild(labelEl);
     }
   }
 
   function checkAnswer() {
-    var currentQuestion = questions[currentQuestionIndex];
-    var selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    var resultEl = document.getElementById("result");
+    const currentQuestion = questions[currentQuestionIndex];
+    const selectedAnswer = document.querySelector(
+      'input[name="answer"]:checked'
+    );
     if (!selectedAnswer) {
       resultEl.textContent = "Please select an answer";
       return;
@@ -82,23 +83,34 @@ var questions = [
     }
   }
 
-function endGame() {
-    clearInterval(timerInterval);
+  function endGame() {
+    clearInterval();
     questionEl.textContent = "";
     answerEl.style.display = "none";
     submitBtn.style.display = "none";
-    resultEl.innerHTML = `Game over! Your score is ${timeLeft}.<br>Enter your initials: <input type="text" id="initials"> <button id="submit-score">Submit</button>`;
-    var initialsInput = document.getElementById("initials");
-    var submitBtn = document.getElementById("submit-score");
-    submitBtn.addEventListener("click", () => {
-      saveScore(initialsInput.value, timeLeft);
+    resultEl.textContent = `Game over! Your score is ${timeLeft}`;
+    const formEl = document.createElement("form");
+    const labelEl = document.createElement("label");
+    labelEl.textContent = "Enter your initials:";
+    const inputEl = document.createElement("input");
+    inputEl.type = "text";
+    formEl.appendChild(labelEl);
+    formEl.appendChild(inputEl);
+    const submitEl = document.createElement("button");
+    submitEl.type = "submit";
+    submitEl.textContent = "Submit";
+    formEl.appendChild(submitEl);
+    resultEl.appendChild(formEl);
+    formEl.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const initials = inputEl.value;
+      saveScore(initials, timeLeft);
       window.location.href = "highscores.html";
     });
   }
-
   
   function saveScore(initials, score) {
-    var scores = JSON.parse(localStorage.getItem("scores")) || [];
+    const scores = JSON.parse(localStorage.getItem("scores")) || [];
     scores.push({ initials, score });
     localStorage.setItem("scores", JSON.stringify(scores));
   }
