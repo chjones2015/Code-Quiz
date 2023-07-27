@@ -88,3 +88,17 @@ var questions = [
         }
     }
 }
+
+function endGame() {
+    clearInterval(timerInterval);
+    questionEl.textContent = "";
+    answerEl.style.display = "none";
+    submitBtn.style.display = "none";
+    resultEl.innerHTML = `Game over! Your score is ${timeLeft}.<br>Enter your initials: <input type="text" id="initials"> <button id="submit-score">Submit</button>`;
+    const initialsInput = document.getElementById("initials");
+    const submitBtn = document.getElementById("submit-score");
+    submitBtn.addEventListener("click", () => {
+      saveScore(initialsInput.value, timeLeft);
+      window.location.href = "highscores.html";
+    });
+  }
