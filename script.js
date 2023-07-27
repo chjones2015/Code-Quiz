@@ -45,14 +45,46 @@ var questions = [
     questionEl.textContent = currentQuestion.question;
     answerEl.value = "";
     for (let i = 0; i < currentQuestion.choices.length; i++) {
-      const choice = currentQuestion.choices[i];
-      const radioEl = document.createElement("input");
+      var choice = currentQuestion.choices[i];
+      var radioEl = document.createElement("input");
       radioEl.type = "radio";
       radioEl.name = "answer";
       radioEl.value = choice;
       questionEl.appendChild(radioEl);
-      const labelEl = document.createElement("label");
+      var labelEl = document.createElement("label");
       labelEl.textContent = choice;
       questionEl.appendChild(labelEl);
     }
   }
+
+  function checkAnswer() {
+    var currentQuestion = questions[currentQuestionIndex];
+    var selectedAnswer = null;
+    var answerInputs = document.getElementsByName("answer");
+    for (var i = 0; i < answerInputs.length; i++) {
+        if (answerInputs[i].checked) {
+            selectedAnswer = answerInputs[i];
+            break;
+        }
+    }
+    var resultEl = document.getElementById("result");
+    if (!selectedAnswer) {
+        resultEl.textContent = "Please select an answer";
+        return;
+    }
+    if (selectedAnswer.value === currentQuestion.answer) {
+        resultEl.textContent = "Correct!";
+        currentQuestionIndex++;
+        if (currentQuestionIndex === questions.length) {
+            endGame();
+        } else {
+            displayQuestion();
+        }
+    } else {
+        resultEl.textContent = "Incorrect!";
+        timeLeft -= 10;
+        if (timeLeft < 0) {
+            timeLeft = 0;
+        }
+    }
+}
